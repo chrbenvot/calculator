@@ -18,18 +18,20 @@ function operate(str){
         let aux=str.split('*');
         return multiply(+aux[0],+aux[1])
     }
-    if (str.includes('+')){
+    else if (str.includes('+')){
         let aux=str.split('+');
         return add(+aux[0],+aux[1])
     }
-    if (str.includes('-')){
+    else if (str.includes('-')){
         let aux=str.split('-');
         return subtract(+aux[0],+aux[1])
     }
-    if (str.includes('/')){
+    else if (str.includes('/')){
         let aux=str.split('/');
         return divide(+aux[0],+aux[1])
     }
+    else return str
+
 }
 const display=document.querySelector('.display');
 var displayValue=display.textContent;
@@ -39,8 +41,12 @@ function handleClick(e){
         display.textContent="";
     }
     else if (e.target.textContent=="="){
-    }else {
-        display.textContent+=e.target.textContent
+    }else if (['*','-','/','+'].includes(e.target.textContent)) {
+        display.textContent=operate(display.textContent);
+        display.textContent+=e.target.textContent;
+    }
+    else {
+        display.textContent+=e.target.textContent;
     }
 }
 
